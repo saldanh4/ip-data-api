@@ -1,5 +1,11 @@
 package model
 
+import (
+	"time"
+
+	goip "github.com/jpiontek/go-ip-api"
+)
+
 type Location struct {
 	As          string  `json:"as"`
 	City        string  `json:"city"`
@@ -15,5 +21,26 @@ type Location struct {
 	Status      string  `json:"status"`
 	Timezone    string  `json:"timezone"`
 	Zip         string  `json:"zip"`
-	TimeStamp   string  `json:"timeStamp`
+	TimeStamp   string  `json:"timeStamp"`
+}
+
+func SetIpData(result *goip.Location, h time.Time) Location {
+	ipData := Location{
+		As:          result.As,
+		City:        result.City,
+		Country:     result.Country,
+		CountryCode: result.CountryCode,
+		Isp:         result.Isp,
+		Lat:         result.Lat,
+		Lon:         result.Lon,
+		Org:         result.Org,
+		Query:       result.Query,
+		Region:      result.Region,
+		RegionName:  result.RegionName,
+		Status:      result.Status,
+		Timezone:    result.Timezone,
+		Zip:         result.Zip,
+		TimeStamp:   h.Format("02/Jan/2006 15:04:05"),
+	}
+	return ipData
 }

@@ -20,23 +20,8 @@ func GetIpData(c *gin.Context) {
 	if err != nil {
 		fmt.Println("Implementar lógica: ", err)
 	}
-	ipData = model.Location{
-		As:          result.As,
-		City:        result.City,
-		Country:     result.Country,
-		CountryCode: result.CountryCode,
-		Isp:         result.Isp,
-		Lat:         result.Lat,
-		Lon:         result.Lon,
-		Org:         result.Org,
-		Query:       result.Query,
-		Region:      result.Region,
-		RegionName:  result.RegionName,
-		Status:      result.Status,
-		Timezone:    result.Timezone,
-		Zip:         result.Zip,
-		TimeStamp:   h.Format("02/Jan/2006 15:04:05"),
-	}
+
+	ipData = model.SetIpData(result, h)
 
 	c.IndentedJSON(http.StatusOK, ipData)
 }
